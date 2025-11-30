@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CloudDesk - Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 min-h-screen flex items-center justify-center">
+  <div class="max-w-md bg-white p-8 rounded-lg shadow-lg">
+      <div class="text-center mb-6">
+        <svg class="w-12 h-12 text-blue-600 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+        <h1 class="text-2xl font-bold text-blue-600 mt-4">Login to CloudDesk</h1>
+        <p class="text-sm text-gray-600 mt-2">Secure cloud-based workspace for managing your documents.</p>
+      </div>
+      <div id="login-form">
+        <form id="loginForm" class="space-y-4">
+          <div>
+            <label for="loginEmail" class="block text-sm font-medium mb-1">Email</label>
+            <input type="email" id="loginEmail" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+          </div>
+          <div class="flex flex-col">
+            <label for="loginPassword" class="block text-sm font-medium mb-1">Password</label>
+            <div class="relative mb-4">
+              <input type="password" id="loginPassword" class="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+              <button type="button" id="toggleLoginPassword" class="absolute right-0 top-0 bottom-0 px-3 flex items-center text-gray-400 hover:text-gray-600">
+                <svg id="eye-open-login" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                </svg>
+                <svg id="eye-closed-login" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" opacity="0.3"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" opacity="0.3"/>
+                  <line x1="3" y1="3" x2="21" y2="21" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition duration-200">Login</button>
+        </form>
+        <div id="loginError" class="text-red-500 mt-4 text-sm"></div>
+        <div class="text-center mt-6">
+          <p>Don't have an account? <a href="#" id="showRegister" class="text-blue-600 hover:underline">Register here</a></p>
+        </div>
+      </div>
+
+      <div id="register-form" class="hidden">
+        <form id="registerForm" class="space-y-4">
+          <div>
+            <label for="registerName" class="block text-sm font-medium mb-1">Name</label>
+            <input type="text" id="registerName" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+          </div>
+          <div>
+            <label for="registerEmail" class="block text-sm font-medium mb-1">Email</label>
+            <input type="email" id="registerEmail" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+          </div>
+          <div class="flex flex-col">
+            <label for="registerPassword" class="block text-sm font-medium mb-1">Password</label>
+            <div class="relative mb-4">
+              <input type="password" id="registerPassword" class="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+              <button type="button" id="toggleRegisterPassword" class="absolute right-0 top-0 bottom-0 px-3 flex items-center text-gray-400 hover:text-gray-600">
+                <svg id="eye-open-register" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                </svg>
+                <svg id="eye-closed-register" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" opacity="0.3"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" opacity="0.3"/>
+                  <line x1="3" y1="3" x2="21" y2="21" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition duration-200">Register</button>
+        </form>
+        <div id="registerError" class="text-red-500 mt-4 text-sm"></div>
+        <div class="text-center mt-6">
+          <p>Already have an account? <a href="#" id="showLogin" class="text-blue-600 hover:underline">Login here</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
+
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="auth.js"></script>
+  <script>
+    // Toggle between login and register forms
+    document.getElementById('showRegister').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('login-form').style.display = 'none';
+      document.getElementById('register-form').style.display = 'block';
+    });
+
+    document.getElementById('showLogin').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('register-form').style.display = 'none';
+      document.getElementById('login-form').style.display = 'block';
+    });
+
+    // Toggle password visibility
+    document.getElementById('toggleLoginPassword').addEventListener('click', () => {
+      const input = document.getElementById('loginPassword');
+      const eyeOpen = document.getElementById('eye-open-login');
+      const eyeClosed = document.getElementById('eye-closed-login');
+      if (input.type === 'password') {
+        input.type = 'text';
+        eyeOpen.classList.remove('hidden');
+        eyeClosed.classList.add('hidden');
+      } else {
+        input.type = 'password';
+        eyeClosed.classList.remove('hidden');
+        eyeOpen.classList.add('hidden');
+      }
+    });
+
+    document.getElementById('toggleRegisterPassword').addEventListener('click', () => {
+      const input = document.getElementById('registerPassword');
+      const eyeOpen = document.getElementById('eye-open-register');
+      const eyeClosed = document.getElementById('eye-closed-register');
+      if (input.type === 'password') {
+        input.type = 'text';
+        eyeOpen.classList.remove('hidden');
+        eyeClosed.classList.add('hidden');
+      } else {
+        input.type = 'password';
+        eyeClosed.classList.remove('hidden');
+        eyeOpen.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
