@@ -1,6 +1,6 @@
 // Import Firebase auth
 import { auth } from './firebase.js';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
 
 // DOM elements
 const loginForm = document.getElementById('loginForm');
@@ -18,6 +18,14 @@ const loginFormDiv = document.getElementById('login-form');
 const registerFormDiv = document.getElementById('register-form');
 
 function initAuth() {
+  // Check if user is already logged in
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, redirect to dashboard
+      window.location.href = 'dashboard.html';
+    }
+  });
+
   // Toggle between login and register forms
   showRegister.addEventListener('click', (e) => {
     e.preventDefault();
