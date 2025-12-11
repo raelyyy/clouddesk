@@ -51,6 +51,10 @@ function initEditor() {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       currentUser = user;
+      // Update profile button with first letter of name
+      const firstLetter = (user.displayName || 'U').charAt(0).toUpperCase();
+      profileBtn.className = 'flex items-center justify-center w-10 h-10 bg-blue-600 rounded-full hover:bg-blue-700 transition duration-200';
+      profileBtn.innerHTML = `<span class="text-xl font-bold text-white">${firstLetter}</span>`;
       docRef = doc(db, 'documents', docId);
       loadingModal.classList.remove('hidden');
       loadingModal.classList.add('flex');
@@ -300,22 +304,38 @@ shareForm.addEventListener('submit', async (e) => {
 });
 
 // Profile dropdown
-profileBtn.addEventListener('click', () => {
-  profileDropdown.classList.toggle('hidden');
-});
+if (profileBtn) {
+  profileBtn.addEventListener('click', () => {
+    if (profileDropdown) profileDropdown.classList.toggle('hidden');
+  });
+}
 
 // Close dropdown when clicking outside
 document.addEventListener('click', (e) => {
-  if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+  if (profileBtn && profileDropdown && !profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
     profileDropdown.classList.add('hidden');
   }
 });
 
 // Account settings
-accountSettingsBtn.addEventListener('click', () => {
-  window.location.href = 'account.html';
-  profileDropdown.classList.add('hidden');
-});
+if (accountSettingsBtn) {
+  accountSettingsBtn.addEventListener('click', () => {
+    window.location.href = 'account.html';
+    if (profileDropdown) profileDropdown.classList.add('hidden');
+  });
+}
+
+// Logout
+if (logoutBtn) {
+  logoutBtn.addEventListener('click', async () => {
+    try {
+      await signOut(auth);
+      window.location.href = 'index.html';
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  });
+}
 
 // Logout
 logoutBtn.addEventListener('click', async () => {

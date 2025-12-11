@@ -11,6 +11,7 @@ const passwordDiv = document.getElementById('passwordDiv');
 const accountError = document.getElementById('accountError');
 const accountSuccess = document.getElementById('accountSuccess');
 const userGreeting = document.getElementById('userGreeting');
+const profileBtn = document.getElementById('profileBtn');
 const loadingModal = document.getElementById('loadingModal');
 
 // Loading modal functions
@@ -34,12 +35,26 @@ function initAccount() {
       if (userGreeting) {
         userGreeting.textContent = `Hello, ${user.displayName || 'User'}!`;
       }
+      // Update profile button with first letter of name
+      if (profileBtn) {
+        const firstLetter = (user.displayName || 'U').charAt(0).toUpperCase();
+        profileBtn.className = 'flex items-center justify-center w-10 h-10 bg-blue-600 rounded-full hover:bg-blue-700 transition duration-200';
+        profileBtn.innerHTML = `<span class="text-xl font-bold text-white">${firstLetter}</span>`;
+      }
     } else {
       // User is signed out, redirect to login
       window.location.href = 'index.html';
     }
   });
 
+
+  // Profile button - go to account page (but we're already here, so maybe do nothing or refresh)
+  if (profileBtn) {
+    profileBtn.addEventListener('click', () => {
+      // Since we're on account page, maybe do nothing or reload
+      // For consistency, perhaps just prevent default or do nothing
+    });
+  }
 
   // Form submission
   accountForm.addEventListener('submit', async (e) => {
@@ -79,6 +94,12 @@ function initAccount() {
       // Update greeting in real-time
       if (userGreeting) {
         userGreeting.textContent = `Hello, ${newDisplayName || 'User'}!`;
+      }
+      // Update profile button with new first letter
+      if (profileBtn) {
+        const firstLetter = (newDisplayName || 'U').charAt(0).toUpperCase();
+        profileBtn.className = 'flex items-center justify-center w-10 h-10 bg-blue-600 rounded-full hover:bg-blue-700 transition duration-200';
+        profileBtn.innerHTML = `<span class="text-xl font-bold text-white">${firstLetter}</span>`;
       }
       hideLoading();
     } catch (error) {
